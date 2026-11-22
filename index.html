@@ -135,12 +135,6 @@ video{width:100%;height:100%;object-fit:contain;z-index:2}
 <button class="btn-top" onclick="cerrarSesion()">🔒 Salir</button>
 </div>
 </header>
-<nav>
-<button class="btn-cat" id="tab-com" onclick="verCat('com')">1. Comunicativo</button>
-<button class="btn-cat" id="tab-gram" onclick="verCat('gram')">2. Gramatical</button>
-<button class="btn-cat" id="tab-lex" onclick="verCat('lex')">3. Léxico</button>
-<button class="btn-cat" id="tab-cult" onclick="verCat('cult')">4. Cultural</button>
-</nav>
 <main>
 <section class="caja">
 <div class="cabecera-sena">
@@ -236,7 +230,6 @@ function verCat(c){
 catActual=c;
 document.getElementById('buscar').value='';
 document.querySelectorAll('.btn-cat').forEach(b=>b.classList.remove('activo'));
-document.getElementById('tab-'+c).classList.add('activo');
 sub.textContent=datos[c].t;
 dibujarBotones(datos[c].i);
 selSena(0);
