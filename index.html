@@ -8,8 +8,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,sans-serif;background:#f0f4f8;color:#1c2833;text-align:center}
 #loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0b4f6c;padding:15px}
-.box{background:#fff;padding:22px 18px;border-radius:16px;width:100%;max-width:420px;box-shadow:0 8px 20px rgba(0,0,0,.15)}
-.top-bar{background:#07364a;color:#fff;padding:10px 15px;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.box{background:#fff;padding:24px 18px;border-radius:16px;width:100%;max-width:410px;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.top-bar{background:#07364a;color:#fff;padding:10px 15px;display:flex;justify-content:space-between;align-items:center;font-weight:700;position:sticky;top:0;z-index:50}
 #btnConfigProfe{display:none;background:#f4a261;color:#111;border:none;padding:6px 12px;border-radius:8px;font-weight:800;cursor:pointer}
 .btn-salir{background:#ffffff33;color:#fff;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700}
 #modalConfig{display:none;position:fixed;inset:0;background:#000000b3;z-index:99;align-items:center;justify-content:center;padding:15px}
@@ -21,7 +21,7 @@ header{background:#0b4f6c;color:#fff;padding:28px 15px 45px}
 .card{background:#fff;padding:18px 15px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.07);margin-bottom:20px}
 .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:#000}
 .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:12px;margin-bottom:20px}
 .inp{width:100%;padding:10px;border:2px solid #cbd5e1;border-radius:10px;margin-bottom:8px;font-size:15px}
 .btn{width:100%;padding:11px;border:none;border-radius:10px;color:#fff;font-weight:800;font-size:15px;cursor:pointer}
 .b-azul{background:#0b4f6c}.b-verde{background:#2a9d8f}.b-rojo{background:#e63946}.b-gris{background:#64748b}
@@ -35,15 +35,14 @@ header{background:#0b4f6c;color:#fff;padding:28px 15px 45px}
 </style>
 </head>
 <body>
-
-<div id="loginScreen">
+  <div id="loginScreen">
   <div class="box">
-    <div style="font-size:45px">🤟🏥</div>
+    <div style="font-size:52px;letter-spacing:10px">🤟🏥</div>
     <h2 style="color:#0b4f6c;margin:8px 0">Lengua de Señas Argentina</h2>
     <p style="color:#555;margin-bottom:15px;font-weight:600">Hospital del Carmen • Acceso DNI</p>
     <input type="text" id="uDni" class="inp" placeholder="🪪 Usuario (DNI sin puntos)">
     <input type="password" id="pDni" class="inp" placeholder="🔑 Contraseña (DNI)">
-    <button onclick="entrar()" class="btn b-azul">ENTRAR AL AULA</button>
+    <button type="button" onclick="entrar()" class="btn b-azul">ENTRAR AL AULA</button>
   </div>
 </div>
 
@@ -61,32 +60,33 @@ header{background:#0b4f6c;color:#fff;padding:28px 15px 45px}
       <input type="text" id="titMat" class="inp" placeholder="🏷️ Título de la seña">
       <input type="text" id="vidMat" class="inp" placeholder="🎥 Link YouTube (opcional)">
       <input type="file" id="imgMat" accept="image/*" class="inp">
-      <button onclick="subirProfe()" class="btn b-verde">➕ PUBLICAR MATERIAL</button>
+      <button type="button" onclick="subirProfe()" class="btn b-verde">➕ PUBLICAR MATERIAL</button>
     </div>
     <div class="sec-cfg">
       <b>2️⃣ Cambiar Video de Bienvenida</b><br><br>
       <input type="text" id="vidPortada" class="inp" placeholder="🎥 Link YouTube portada">
-      <button onclick="cambiarPortada()" class="btn b-azul">🔄 ACTUALIZAR PORTADA</button>
+      <button type="button" onclick="cambiarPortada()" class="btn b-azul">🔄 ACTUALIZAR PORTADA</button>
     </div>
     <div class="sec-cfg">
       <b>3️⃣ Cambiar tu Contraseña</b><br><br>
       <input type="password" id="nuevaClave" class="inp" placeholder="🔑 Nueva contraseña">
-      <button onclick="cambiarClave()" class="btn b-azul">💾 GUARDAR CLAVE</button>
+      <button type="button" onclick="cambiarClave()" class="btn b-azul">💾 GUARDAR CLAVE</button>
     </div>
-    <button onclick="cerrarCfg()" class="btn b-gris">✖ CERRAR</button>
+    <button type="button" onclick="cerrarCfg()" class="btn b-gris">✖️ CERRAR</button>
   </div>
 </div>
+
 <div id="mainApp">
   <div class="top-bar">
     <span id="lblUser">👤 Bienvenido</span>
     <div>
-      <button id="btnConfigProfe" onclick="abrirCfg()">⚙️ Configuración</button>
-      <button onclick="salir()" class="btn-salir">Salir</button>
+      <button type="button" id="btnConfigProfe" onclick="abrirCfg()">⚙️ Configuración</button>
+      <button type="button" onclick="salir()" class="btn-salir">Salir</button>
     </div>
   </div>
 
   <header>
-    <div style="font-size:42px;letter-spacing:8px">🤟🏥</div>
+    <div style="font-size:48px;letter-spacing:10px">🤟🏥</div>
     <h1>Lengua de Señas Argentina</h1>
     <p>Hospital del Carmen • San José de Metán, Salta</p>
   </header>
@@ -107,10 +107,10 @@ header{background:#0b4f6c;color:#fff;padding:28px 15px 45px}
     <div class="card" style="border-top:5px solid #2a9d8f">
       <h2 style="color:#0b4f6c">📂 CONTENIDOS Y MATERIALES</h2>
       <div class="tabs">
-        <button class="tab active" onclick="verTab('m1',this)">🔤 Dactilología</button>
-        <button class="tab" onclick="verTab('m2',this)">🏥 Hospital</button>
-        <button class="tab" onclick="verTab('m3',this)">🔢 Números</button>
-        <button class="tab" onclick="verTab('m4',this)">🤟 Cultura</button>
+        <button type="button" class="tab active" onclick="verTab('m1',this)">🔤 Dactilología</button>
+        <button type="button" class="tab" onclick="verTab('m2',this)">🏥 Hospital</button>
+        <button type="button" class="tab" onclick="verTab('m3',this)">🔢 Números</button>
+        <button type="button" class="tab" onclick="verTab('m4',this)">🤟 Cultura</button>
       </div>
       <div id="m1" class="mod active"><div id="gm1" class="grid"></div></div>
       <div id="m2" class="mod"><div id="gm2" class="grid"></div></div>
@@ -125,13 +125,13 @@ header{background:#0b4f6c;color:#fff;padding:28px 15px 45px}
           <b>🎥 Subir Video YouTube</b><br><br>
           <input type="text" id="nomVid" class="inp" placeholder="👤 Tu Nombre y Área">
           <input type="text" id="urlVid" class="inp" placeholder="🔗 Enlace YouTube">
-          <button onclick="subirVidAlu()" class="btn b-rojo">➕ PUBLICAR VIDEO</button>
+          <button type="button" onclick="subirVidAlu()" class="btn b-rojo">➕ PUBLICAR VIDEO</button>
         </div>
         <div class="item-card">
           <b>🖼️ Subir Imagen</b><br><br>
           <input type="text" id="nomImg" class="inp" placeholder="👤 Tu Nombre y Área">
           <input type="file" id="filImg" accept="image/*" class="inp">
-          <button onclick="subirImgAlu()" class="btn b-verde">➕ PUBLICAR IMAGEN</button>
+          <button type="button" onclick="subirImgAlu()" class="btn b-verde">➕ PUBLICAR IMAGEN</button>
         </div>
       </div>
       <div id="muroAlu" class="grid"></div>
@@ -144,114 +144,134 @@ header{background:#0b4f6c;color:#fff;padding:28px 15px 45px}
     </div>
   </div>
 </div>
-
 <script>
 const DNI_PROFE = "12345678";
 let soyProfe = false;
 
-function entrar(){
+function entrar() {
   const u = document.getElementById("uDni").value.trim();
   const p = document.getElementById("pDni").value.trim();
   const clave = localStorage.getItem("clave_profe") || DNI_PROFE;
-  if(u === DNI_PROFE && p === clave){
+
+  if (u === DNI_PROFE && p === clave) {
     soyProfe = true;
-    document.getElementById("loginScreen").style.display="none";
-    document.getElementById("mainApp").style.display="block";
-    document.getElementById("lblUser").innerText="🎓 Instructor CAS";
-    document.getElementById("btnConfigProfe").style.display="inline-block";
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
+    document.getElementById("lblUser").innerText = "🎓 Instructor CAS";
+    document.getElementById("btnConfigProfe").style.display = "inline-block";
     pintarTodo();
-  } else if(u === p && /^\d{7,8}$/.test(u) && u !== DNI_PROFE){
+  } else if (u === p && /^\d{7,8}$/.test(u) && u !== DNI_PROFE) {
     soyProfe = false;
-    document.getElementById("loginScreen").style.display="none";
-    document.getElementById("mainApp").style.display="block";
-    document.getElementById("lblUser").innerText="👤 Alumno: "+u;
-    document.getElementById("btnConfigProfe").style.display="none";
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
+    document.getElementById("lblUser").innerText = "👤 Alumno: " + u;
+    document.getElementById("btnConfigProfe").style.display = "none";
     pintarTodo();
-  } else { alert("❌ DNI o clave incorrectos"); }
+  } else {
+    alert("❌ DNI o clave incorrectos");
+  }
 }
-function salir(){ location.reload(); }
-function abrirCfg(){ document.getElementById("modalConfig").style.display="flex"; }
-function cerrarCfg(){ document.getElementById("modalConfig").style.display="none"; }
-function cambiarClave(){
+
+function salir() { location.reload(); }
+function abrirCfg() { document.getElementById("modalConfig").style.display = "flex"; }
+function cerrarCfg() { document.getElementById("modalConfig").style.display = "none"; }
+
+function cambiarClave() {
   const c = document.getElementById("nuevaClave").value.trim();
-  if(c.length<4) return alert("⚠️ Mínimo 4 caracteres");
-  localStorage.setItem("clave_profe",c); alert("✅ Clave guardada");
+  if (c.length < 4) return alert("⚠️ Mínimo 4 caracteres");
+  localStorage.setItem("clave_profe", c);
+  alert("✅ Clave guardada");
 }
-function ytId(url){
+
+function ytId(url) {
   const m = url.match(/^.(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]).*/);
-  return (m && m[2].length===11) ? m[2] : null;
+  return (m && m[2].length === 11) ? m[2] : null;
 }
-function cambiarPortada(){
+
+function cambiarPortada() {
   const id = ytId(document.getElementById("vidPortada").value.trim());
-  if(!id) return alert("⚠️ Link inválido");
-  localStorage.setItem("vid_portada",id);
-  document.getElementById("ifPortada").src="https://youtube.com"+id+"?rel=0";
+  if (!id) return alert("⚠️ Link inválido");
+  localStorage.setItem("vid_portada", id);
+  document.getElementById("ifPortada").src = "https://youtube.com" + id + "?rel=0";
   alert("✅ Portada actualizada");
 }
-function verTab(id,btn){
-  document.querySelectorAll(".mod").forEach(e=>e.classList.remove("active"));
-  document.querySelectorAll(".tab").forEach(e=>e.classList.remove("active"));
+
+function verTab(id, btn) {
+  document.querySelectorAll(".mod").forEach(e => e.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(e => e.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   btn.classList.add("active");
 }
-function subirProfe(){
+
+function subirProfe() {
   const m = document.getElementById("selMod").value;
   const t = document.getElementById("titMat").value.trim();
   const v = ytId(document.getElementById("vidMat").value.trim());
   const f = document.getElementById("imgMat").files[0];
-  if(!t) return alert("⚠️ Escribe un título");
-  if(v){ guardar(m,{id:Date.now(),tipo:"v",t:t,d:v}); limpiar(); }
-  else if(f){
+  if (!t) return alert("⚠️ Escribe un título");
+  if (v) { guardar(m, { id: Date.now(), tipo: "v", t: t, d: v }); limpiar(); }
+  else if (f) {
     const r = new FileReader();
-    r.onload=e=>{ guardar(m,{id:Date.now(),tipo:"i",t:t,d:e.target.result}); limpiar(); };
+    r.onload = e => { guardar(m, { id: Date.now(), tipo: "i", t: t, d: e.target.result }); limpiar(); };
     r.readAsDataURL(f);
   } else { alert("⚠️ Pega un video o elige una imagen"); }
 }
-function guardar(m,obj){
-  const arr = JSON.parse(localStorage.getItem("lsa_"+m)||"[]");
-  arr.unshift(obj); localStorage.setItem("lsa_"+m,JSON.stringify(arr));
+
+function guardar(m, obj) {
+  const arr = JSON.parse(localStorage.getItem("lsa_" + m) || "[]");
+  arr.unshift(obj);
+  localStorage.setItem("lsa_" + m, JSON.stringify(arr));
 }
-function borrar(m,id){
-  let arr = JSON.parse(localStorage.getItem("lsa_"+m)||"[]");
-  arr = arr.filter(x=>x.id!==id); localStorage.setItem("lsa_"+m,JSON.stringify(arr));
+
+function borrar(m, id) {
+  let arr = JSON.parse(localStorage.getItem("lsa_" + m) || "[]");
+  arr = arr.filter(x => x.id !== id);
+  localStorage.setItem("lsa_" + m, JSON.stringify(arr));
   pintarTodo();
 }
-function limpiar(){
-  document.getElementById("titMat").value="";
-  document.getElementById("vidMat").value="";
-  document.getElementById("imgMat").value="";
-  pintarTodo(); alert("✅ Publicado");
+
+function limpiar() {
+  document.getElementById("titMat").value = "";
+  document.getElementById("vidMat").value = "";
+  document.getElementById("imgMat").value = "";
+  pintarTodo();
+  alert("✅ Publicado");
 }
-function pintarTodo(){
+
+function pintarTodo() {
   const vp = localStorage.getItem("vid_portada");
-  if(vp) document.getElementById("ifPortada").src="https://youtube.com"+vp+"?rel=0";
-  ["m1","m2","m3","m4"].forEach(m=>{
-    const box = document.getElementById("g"+m);
-    const arr = JSON.parse(localStorage.getItem("lsa_"+m)||"[]");
+  if (vp) document.getElementById("ifPortada").src = "https://youtube.com" + vp + "?rel=0";
+  ["m1", "m2", "m3", "m4"].forEach(m => {
+    const box = document.getElementById("g" + m);
+    const arr = JSON.parse(localStorage.getItem("lsa_" + m) || "[]");
     box.innerHTML = arr.length ? "" : "<p style='color:#666;grid-column:1/-1'>📂 Sin materiales aún</p>";
-    arr.forEach(x=>{
-      const med = x.tipo==="v" ? <div class="video-wrap"><iframe src="https://youtube.com${x.d}?rel=0" allowfullscreen></iframe></div> : <img src="${x.d}">;
-      const del = soyProfe ? <br><button onclick="borrar('${m}',${x.id})" style="background:#ef4444;color:#fff;border:none;padding:5px 10px;border-radius:6px;margin-top:6px;cursor:pointer">🗑️ Borrar</button> : "";
+    arr.forEach(x => {
+      const med = x.tipo === "v" ? <div class="video-wrap"><iframe src="https://youtube.com${x.d}?rel=0" allowfullscreen></iframe></div> : <img src="${x.d}">;
+      const del = soyProfe ? <br><button type="button" onclick="borrar('${m}',${x.id})" style="background:#ef4444;color:#fff;border:none;padding:5px 10px;border-radius:6px;margin-top:6px;cursor:pointer">🗑️ Borrar</button> : "";
       box.innerHTML += <div class="item-card">${med}<p style="font-weight:800;margin-top:6px">🤟 ${x.t}</p>${del}</div>;
     });
   });
 }
-function subirVidAlu(){
+
+function subirVidAlu() {
   const n = document.getElementById("nomVid").value.trim();
   const u = document.getElementById("urlVid").value.trim();
   const id = ytId(u);
-  if(!n||!id) return alert("⚠️ Completa nombre y link válido");
+  if (!n || !id) return alert("⚠️ Completa nombre y link válido");
   document.getElementById("muroAlu").innerHTML = <div class="item-card"><div class="video-wrap"><iframe src="https://youtube.com${id}?rel=0" allowfullscreen></iframe></div><p style="font-weight:800;margin:6px 0">🎥 ${n}</p><a href="https://wa.me{encodeURIComponent(n)}%20${encodeURIComponent(u)}" target="_blank" style="background:#0b4f6c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:13px;display:inline-block">🤟 Avisar Instructor</a></div> + document.getElementById("muroAlu").innerHTML;
-  document.getElementById("nomVid").value=""; document.getElementById("urlVid").value="";
+  document.getElementById("nomVid").value = "";
+  document.getElementById("urlVid").value = "";
 }
-function subirImgAlu(){
+
+function subirImgAlu() {
   const n = document.getElementById("nomImg").value.trim();
   const f = document.getElementById("filImg").files[0];
-  if(!n||!f) return alert("⚠️ Completa nombre y elige imagen");
+  if (!n || !f) return alert("⚠️ Completa nombre y elige imagen");
   const r = new FileReader();
-  r.onload=e=>{
+  r.onload = e => {
     document.getElementById("muroAlu").innerHTML = <div class="item-card"><img src="${e.target.result}"><p style="font-weight:800;margin:6px 0">🖼️ ${n}</p><a href="https://wa.me{encodeURIComponent(n)}" target="_blank" style="background:#0b4f6c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:13px;display:inline-block">🤟 Avisar Instructor</a></div> + document.getElementById("muroAlu").innerHTML;
-    document.getElementById("nomImg").value=""; document.getElementById("filImg").value="";
+    document.getElementById("nomImg").value = "";
+    document.getElementById("filImg").value = "";
   };
   r.readAsDataURL(f);
 }
