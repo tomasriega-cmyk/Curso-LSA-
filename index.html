@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula Práctica LSA</title>
+<style>
+:root{--fondo:#F0F6FC;--tarjeta:#FFFFFF;--azul:#0284C7;--dorado:#F59E0B;--texto:#0F172A;--gris:#475569;--borde:#E2E8F0}
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+body{background:var(--fondo);color:var(--texto);line-height:1.5}
+header{background:var(--tarjeta);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--borde)}
+.logo{font-size:1.3rem;font-weight:700;color:var(--azul)}
+.logo span{background:var(--azul);color:#fff;padding:4px 10px;border-radius:8px;margin-right:8px}
+nav{background:var(--tarjeta);padding:12px 20px;display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--borde)}
+.btn-cat{background:#F8FAFC;border:2px solid var(--borde);padding:8px 14px;font-weight:600;color:var(--gris);border-radius:20px;cursor:pointer}
+.btn-cat.activo{background:#E0F2FE;color:var(--azul);border-color:var(--azul)}
+main{max-width:1100px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
+.caja{background:var(--tarjeta);border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(2,132,199,0.08)}
+h1{font-size:1.4rem;margin-bottom:10px}
+.desc{background:#F8FAFC;border-left:4px solid var(--azul);padding:10px 14px;margin-bottom:16px;font-size:.95rem}
+.marco{width:100%;aspect-ratio:16/9;background:#0F172A;border-radius:12px;overflow:hidden}
+video{width:100%;height:100%;object-fit:contain}
+.controles{margin-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.btn-c{padding:10px 14px;border:none;border-radius:10px;font-weight:600;cursor:pointer}
+.b-norm{background:var(--azul);color:#fff}
+.b-lent{background:var(--dorado);color:#fff}
+.b-rep{background:var(--fondo);color:var(--azul);border:1px solid var(--azul)}
+.lista{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.btn-s{width:100%;text-align:left;padding:12px;background:#fff;border:2px solid var(--borde);border-radius:12px;font-weight:600;cursor:pointer}
+.btn-s.sel{border-color:var(--dorado);background:#FFFBEB;color:#B45309}
+@media(max-width:800px){main{grid-template-columns:1fr}nav{display:grid;grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><div class="logo"><span>LSA</span>Aula Práctica</div></header>
+<nav>
+<button class="btn-cat activo" onclick="verCat('com',this)">1. Comunicativo</button>
+<button class="btn-cat" onclick="verCat('gram',this)">2. Gramatical</button>
+<button class="btn-cat" onclick="verCat('lex',this)">3. Léxico</button>
+<button class="btn-cat" onclick="verCat('cult',this)">4. Cultural</button>
+</nav>
+<main>
+<section class="caja">
+<h1 id="tit"></h1>
+<p class="desc" id="des"></p>
+<div class="marco"><video id="vid" controls loop autoplay muted playsinline></video></div>
+<div class="controles">
+<button class="btn-c b-rep" onclick="rep()">🔄 Repetir</button>
+<div>
+<button class="btn-c b-norm" onclick="vel(1)">1x Normal</button>
+<button class="btn-c b-lent" onclick="vel(0.5)">0.5x Lento</button>
+</div>
+</div>
+</section>
+<aside class="caja">
+<h2 id="subtit" style="font-size:1.1rem"></h2>
+<div class="lista" id="btns"></div>
+</aside>
+</main>
+<script>
+const datos={
+com:{t:"1. Contenido Comunicativo",i:[
+{n:"Saludos y Despedidas",d:"Hola, buen día, buenas tardes, chau.",v:"videos/com_saludos.mp4"},
+{n:"Presentación Personal",d:"Nombre en dactilología y seña personal.",v:"videos/com_presentacion.mp4"},
+{n:"Datos Personales",d:"Edad, lugar de residencia y condición auditiva.",v:"videos/com_datos.mp4"},
+{n:"Cortesía y Regulación",d:"Gracias, por favor, no entiendo, repetir.",v:"videos/com_cortesia.mp4"},
+{n:"Preguntas Básicas",d:"¿Qué?, ¿Quién?, ¿Dónde?, ¿Cuándo?, ¿Por qué?",v:"videos/com_preguntas.mp4"}
+]},
+gram:{t:"2. Contenido Gramatical",i:[
+{n:"Rasgos No Manuales (RNM)",d:"Expresión facial, cejas y postura corporal.",v:"videos/gram_rnm.mp4"},
+{n:"Uso del Espacio Señante",d:"Ubicación de referentes en el espacio.",v:"videos/gram_espacio.mp4"},
+{n:"Orden de la Oración",d:"Tiempo + Lugar + Sujeto + Objeto + Verbo.",v:"videos/gram_orden.mp4"},
+{n:"Pronombres y Deixis",d:"Señalamiento a participantes presentes o ausentes.",v:"videos/gram_pronombres.mp4"},
+{n:"Verbos y Clasificadores",d:"Verbos direccionales y formas de objetos.",v:"videos/gram_verbos.mp4"}
+]},
+lex:{t:"3. Contenido Léxico",i:[
+{n:"Alfabeto Dactilológico",d:"Configuraciones manuales de la A a la Z.",v:"videos/lex_abecedario.mp4"},
+{n:"Números, Días y Tiempo",d:"Números, días de la semana y meses.",v:"videos/lex_tiempo.mp4"},
+{n:"Familia y Personas",d:"Mamá, papá, hermano, amigo, profesor.",v:"videos/lex_familia.mp4"},
+{n:"Lugares y Ciudad",d:"Casa, escuela, hospital, asociación, trabajo.",v:"videos/lex_lugares.mp4"},
+{n:"Salud y Estados",d:"Bienestar, dolor, ayuda y acciones diarias.",v:"videos/lex_salud.mp4"}
+]},
+cult:{t:"4. Contenido Cultural",i:[
+{n:"Identidad y Comunidad",d:"La persona sorda como sujeto cultural y lingüístico.",v:"videos/cult_identidad.mp4"},
+{n:"Historia Comunidad Sorda",d:"Congreso de Milán (1880) e institutos en Argentina.",v:"videos/cult_historia.mp4"},
+{n:"Asociaciones y CAS",d:"Rol histórico de las asociaciones y la CAS.",v:"videos/cult_cas.mp4"},
+{n:"Reglas y Seña Personal",d:"Contacto visual, atención y apodo personal.",v:"videos/cult_reglas.mp4"},
+{n:"Leyes y Derechos LSA",d:"Reconocimiento de la LSA y accesibilidad.",v:"videos/cult_leyes.mp4"}
+]}
+};
+const vid=document.getElementById('vid'),tit=document.getElementById('tit'),des=document.getElementById('des'),sub=document.getElementById('subtit'),btns=document.getElementById('btns');
+function verCat(c,el){
+document.querySelectorAll('.btn-cat').forEach(b=>b.classList.remove('activo'));
+el.classList.add('activo');
+sub.textContent=datos[c].t;
+btns.innerHTML='';
+datos[c].i.forEach((it,idx)=>{
+const b=document.createElement('button');
+b.className='btn-s'+(idx===0?' sel':'');
+b.textContent='🤟 '+it.n;
+b.onclick=()=>selSena(it,b);
+btns.appendChild(b);
+});
+selSena(datos[c].i[0],btns.firstChild);
+}
+function selSena(it,b){
+document.querySelectorAll('.btn-s').forEach(x=>x.classList.remove('sel'));
+if(b)b.classList.add('sel');
+tit.textContent=it.n;
+des.textContent=it.d;
+vid.src=it.v;
+vid.playbackRate=1;
+vid.play().catch(()=>{});
+}
+function vel(v){vid.playbackRate=v;vid.play().catch(()=>{});}
+function rep(){vid.currentTime=0;vid.play().catch(()=>{});}
+verCat('com',document.querySelector('.btn-cat'));
+</script>
+</body>
+</html>
