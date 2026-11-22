@@ -3,275 +3,258 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Curso de Lengua de Señas Argentina (LSA)</title>
+<title>Lengua de Señas Argentina • Hospital del Carmen</title>
 <style>
-:root{--fondo:#F0F6FC;--tarjeta:#FFFFFF;--azul:#0284C7;--azul-osc:#0369A1;--dorado:#F59E0B;--texto:#0F172A;--gris:#475569;--borde:#E2E8F0}
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
-body{background:var(--fondo);color:var(--texto);line-height:1.5}
-#pantalla-login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#E0F2FE 0%,#F0F6FC 100%)}
-.tarjeta-login{background:var(--tarjeta);max-width:440px;width:100%;padding:32px 26px;border-radius:20px;box-shadow:0 10px 25px rgba(2,132,199,0.12);text-align:center}
-.insignia-lsa{display:inline-block;background:var(--azul);color:#fff;font-weight:700;padding:6px 14px;border-radius:20px;font-size:.9rem;margin-bottom:14px}
-.tarjeta-login h1{font-size:1.6rem;margin-bottom:8px}
-.tarjeta-login p{color:var(--gris);font-size:.95rem;margin-bottom:20px}
-.grupo-campo{text-align:left;margin-bottom:14px}
-.grupo-campo label{display:block;font-size:.88rem;font-weight:700;color:var(--texto);margin-bottom:5px}
-.input-clave{width:100%;padding:12px 16px;border:2px solid var(--borde);border-radius:12px;font-size:1rem;letter-spacing:1px}
-.input-clave:focus{outline:none;border-color:var(--azul)}
-.btn-entrar{width:100%;padding:13px;background:var(--azul);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:6px}
-.btn-entrar:hover{background:var(--azul-osc)}
-.error-clave{color:#DC2626;font-size:.88rem;margin-top:12px;font-weight:600;display:none}
-.caja-inscripcion{margin-top:20px;padding-top:16px;border-top:1px solid var(--borde);font-size:.9rem;color:var(--gris)}
-.btn-wsp{display:inline-block;margin-top:8px;background:#16A34A;color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:700}
-header{background:var(--tarjeta);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--borde)}
-.logo{font-size:1.25rem;font-weight:700;color:var(--azul)}
-.logo span{background:var(--azul);color:#fff;padding:4px 10px;border-radius:8px;margin-right:8px}
-.btn-top{background:#F1F5F9;border:1px solid var(--borde);padding:7px 13px;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--gris)}
-#pantalla-menu{display:none}
-.contenedor-menu{max-width:960px;margin:36px auto;padding:0 20px;text-align:center}
-.contenedor-menu h2{font-size:1.6rem;margin-bottom:6px}
-.contenedor-menu p{color:var(--gris);margin-bottom:28px}
-.grilla-materias{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.card-materia{background:var(--tarjeta);border:2px solid var(--borde);border-radius:18px;padding:28px 22px;text-align:left;cursor:pointer;transition:.2s;box-shadow:0 4px 12px rgba(2,132,199,0.06);display:flex;flex-direction:column;gap:8px}
-.card-materia:hover{border-color:var(--azul);transform:translateY(-3px);box-shadow:0 8px 20px rgba(2,132,199,0.14)}
-.num-materia{display:inline-block;background:#E0F2FE;color:var(--azul);font-weight:700;padding:4px 12px;border-radius:12px;font-size:.85rem;width:fit-content}
-.card-materia h3{font-size:1.25rem;color:var(--texto)}
-.card-materia span{color:var(--gris);font-size:.92rem}
-.btn-ir{margin-top:8px;color:var(--azul);font-weight:700;font-size:.92rem}
-#aula-contenido{display:none}
-nav{background:var(--tarjeta);padding:10px 20px;display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--borde)}
-.btn-cat{background:#F8FAFC;border:2px solid var(--borde);padding:8px 14px;font-weight:600;color:var(--gris);border-radius:20px;cursor:pointer}
-.btn-cat.activo{background:#E0F2FE;color:var(--azul);border-color:var(--azul)}
-main{max-width:1120px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
-.caja{background:var(--tarjeta);border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(2,132,199,0.08)}
-.cabecera-sena{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
-.cabecera-sena h2{font-size:1.4rem}
-.btn-ojo{background:#F1F5F9;border:1px solid var(--borde);padding:6px 12px;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--gris)}
-.desc{background:#F8FAFC;border-left:4px solid var(--azul);padding:10px 14px;margin-bottom:16px;font-size:.95rem;border-radius:0 8px 8px 0}
-.oculta{filter:blur(6px);user-select:none}
-.marco{width:100%;aspect-ratio:16/9;background:#0F172A;border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
-video{width:100%;height:100%;object-fit:contain;z-index:2}
-.aviso-video{position:absolute;color:#E0F2FE;text-align:center;padding:20px;z-index:1;font-size:.95rem}
-.controles{margin-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.grupo-btn{display:flex;gap:8px;flex-wrap:wrap}
-.btn-c{padding:9px 13px;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:.9rem}
-.b-norm{background:#E0F2FE;color:var(--azul)}
-.b-norm.activa{background:var(--azul);color:#fff}
-.b-lent{background:#FEF3C7;color:#B45309}
-.b-lent.activa{background:var(--dorado);color:#fff}
-.b-rep,.b-nav{background:var(--fondo);color:var(--azul);border:1px solid var(--azul)}
-.buscador{width:100%;padding:10px 12px;border:2px solid var(--borde);border-radius:10px;margin:10px 0;font-size:.95rem}
-.lista{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow-y:auto}
-.btn-s{width:100%;text-align:left;padding:11px 12px;background:#fff;border:2px solid var(--borde);border-radius:12px;font-weight:600;cursor:pointer;font-size:.92rem}
-.btn-s.sel{border-color:var(--dorado);background:#FFFBEB;color:#B45309}
-@media(max-width:800px){main,.grilla-materias{grid-template-columns:1fr}nav{display:grid;grid-template-columns:1fr 1fr}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#f0f4f8;color:#1c2833;text-align:center}
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0b4f6c;padding:15px}
+.box{background:#fff;padding:22px 18px;border-radius:16px;width:100%;max-width:420px;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.top-bar{background:#07364a;color:#fff;padding:10px 15px;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+#btnConfigProfe{display:none;background:#f4a261;color:#111;border:none;padding:6px 12px;border-radius:8px;font-weight:800;cursor:pointer}
+.btn-salir{background:#ffffff33;color:#fff;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+#modalConfig{display:none;position:fixed;inset:0;background:#000000b3;z-index:99;align-items:center;justify-content:center;padding:15px}
+.config-card{background:#fff;padding:20px;border-radius:16px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;text-align:left}
+.sec-cfg{background:#f8fafc;border:1px solid #cbd5e1;padding:12px;border-radius:10px;margin-bottom:12px}
+#mainApp{display:none}
+header{background:#0b4f6c;color:#fff;padding:28px 15px 45px}
+.wrap{max-width:900px;margin:-25px auto 30px;padding:0 15px}
+.card{background:#fff;padding:18px 15px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.07);margin-bottom:20px}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:#000}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:20px}
+.inp{width:100%;padding:10px;border:2px solid #cbd5e1;border-radius:10px;margin-bottom:8px;font-size:15px}
+.btn{width:100%;padding:11px;border:none;border-radius:10px;color:#fff;font-weight:800;font-size:15px;cursor:pointer}
+.b-azul{background:#0b4f6c}.b-verde{background:#2a9d8f}.b-rojo{background:#e63946}.b-gris{background:#64748b}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.tab{padding:8px 12px;border:none;border-radius:8px;background:#e2e8f0;font-weight:700;cursor:pointer}
+.tab.active{background:#2a9d8f;color:#fff}
+.mod{display:none}.mod.active{display:block}
+.item-card{background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:10px}
+.item-card img{width:100%;max-height:220px;object-fit:contain;border-radius:8px;background:#fff}
+.btn-wa{display:inline-block;background:#25D366;color:#073018;font-weight:800;padding:12px 24px;border-radius:50px;text-decoration:none;margin:10px 0}
 </style>
 </head>
 <body>
-<!-- PANTALLA 1: ACCESO PERSONALIZADO POR ALUMNO -->
-<div id="pantalla-login">
-<div class="tarjeta-login">
-<div class="insignia-lsa">🤟 Lengua de Señas Argentina</div>
-<h1>¡Bienvenidos al Curso de LSA!</h1>
-<p>Ingresa tu número de <b>DNI</b> como usuario y la <b>contraseña asignada</b> por el docente.</p>
-<div class="grupo-campo">
-<label for="campo-usuario">👤 Usuario (DNI sin puntos)</label>
-<input type="text" inputmode="numeric" id="campo-usuario" class="input-clave" placeholder="Ej: 35123456">
+
+<div id="loginScreen">
+  <div class="box">
+    <div style="font-size:45px">🤟🏥</div>
+    <h2 style="color:#0b4f6c;margin:8px 0">Lengua de Señas Argentina</h2>
+    <p style="color:#555;margin-bottom:15px;font-weight:600">Hospital del Carmen • Acceso DNI</p>
+    <input type="text" id="uDni" class="inp" placeholder="🪪 Usuario (DNI sin puntos)">
+    <input type="password" id="pDni" class="inp" placeholder="🔑 Contraseña (DNI)">
+    <button onclick="entrar()" class="btn b-azul">ENTRAR AL AULA</button>
+  </div>
 </div>
-<div class="grupo-campo">
-<label for="campo-clave">🔑 Contraseña personal</label>
-<input type="password" id="campo-clave" class="input-clave" placeholder="Escribe tu contraseña" onkeyup="if(event.key==='Enter')verificarAcceso()">
+
+<div id="modalConfig">
+  <div class="config-card">
+    <h3 style="color:#0b4f6c;text-align:center;margin-bottom:12px">⚙️ Configuración Instructor</h3>
+    <div class="sec-cfg">
+      <b>1️⃣ Subir Video o Imagen a Contenido</b><br><br>
+      <select id="selMod" class="inp">
+        <option value="m1">🔤 1. Dactilología y Saludos</option>
+        <option value="m2">🏥 2. Vocabulario Hospital</option>
+        <option value="m3">🔢 3. Números y Datos</option>
+        <option value="m4">🤟 4. Cultura y Gramática</option>
+      </select>
+      <input type="text" id="titMat" class="inp" placeholder="🏷️ Título de la seña">
+      <input type="text" id="vidMat" class="inp" placeholder="🎥 Link YouTube (opcional)">
+      <input type="file" id="imgMat" accept="image/*" class="inp">
+      <button onclick="subirProfe()" class="btn b-verde">➕ PUBLICAR MATERIAL</button>
+    </div>
+    <div class="sec-cfg">
+      <b>2️⃣ Cambiar Video de Bienvenida</b><br><br>
+      <input type="text" id="vidPortada" class="inp" placeholder="🎥 Link YouTube portada">
+      <button onclick="cambiarPortada()" class="btn b-azul">🔄 ACTUALIZAR PORTADA</button>
+    </div>
+    <div class="sec-cfg">
+      <b>3️⃣ Cambiar tu Contraseña</b><br><br>
+      <input type="password" id="nuevaClave" class="inp" placeholder="🔑 Nueva contraseña">
+      <button onclick="cambiarClave()" class="btn b-azul">💾 GUARDAR CLAVE</button>
+    </div>
+    <button onclick="cerrarCfg()" class="btn b-gris">✖ CERRAR</button>
+  </div>
 </div>
-<button class="btn-entrar" onclick="verificarAcceso()">Ingresar al Curso</button>
-<div id="msg-error" class="error-clave">❌ Usuario o contraseña incorrectos. Verifica tus datos con el docente.</div>
-<div class="caja-inscripcion">
-¿Aún no estás inscripto?<br>
-<a href="https://wa.me" target="_blank" class="btn-wsp">💬 Inscribirme por WhatsApp (Solo texto)</a>
+<div id="mainApp">
+  <div class="top-bar">
+    <span id="lblUser">👤 Bienvenido</span>
+    <div>
+      <button id="btnConfigProfe" onclick="abrirCfg()">⚙️ Configuración</button>
+      <button onclick="salir()" class="btn-salir">Salir</button>
+    </div>
+  </div>
+
+  <header>
+    <div style="font-size:42px;letter-spacing:8px">🤟🏥</div>
+    <h1>Lengua de Señas Argentina</h1>
+    <p>Hospital del Carmen • San José de Metán, Salta</p>
+  </header>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="video-wrap"><iframe id="ifPortada" src="https://youtube.com" allowfullscreen></iframe></div>
+      <p style="margin-top:10px;font-weight:800;color:#0b4f6c">🤟 PRESENTACIÓN EN LSA (NIVEL A1)</p>
+    </div>
+
+    <div class="grid">
+      <div class="card"><div style="font-size:36px">🏥</div><b>100% PRESENCIAL</b><p>Hospital del Carmen</p></div>
+      <div class="card"><div style="font-size:36px">📅</div><b>3 MESES</b><p>48 Hs • 24 Clases</p></div>
+      <div class="card"><div style="font-size:36px">🩺</div><b>EQUIPO SALUD</b><p>Cupo: 15 a 25</p></div>
+      <div class="card"><div style="font-size:36px">🎓</div><b>DPTO LSA CAS</b><p>Instructor Sordo</p></div>
+    </div>
+
+    <div class="card" style="border-top:5px solid #2a9d8f">
+      <h2 style="color:#0b4f6c">📂 CONTENIDOS Y MATERIALES</h2>
+      <div class="tabs">
+        <button class="tab active" onclick="verTab('m1',this)">🔤 Dactilología</button>
+        <button class="tab" onclick="verTab('m2',this)">🏥 Hospital</button>
+        <button class="tab" onclick="verTab('m3',this)">🔢 Números</button>
+        <button class="tab" onclick="verTab('m4',this)">🤟 Cultura</button>
+      </div>
+      <div id="m1" class="mod active"><div id="gm1" class="grid"></div></div>
+      <div id="m2" class="mod"><div id="gm2" class="grid"></div></div>
+      <div id="m3" class="mod"><div id="gm3" class="grid"></div></div>
+      <div id="m4" class="mod"><div id="gm4" class="grid"></div></div>
+    </div>
+
+    <div class="card" style="border-top:5px solid #e63946">
+      <h2 style="color:#0b4f6c">🎥🖼️ PRÁCTICAS DE ALUMNOS</h2>
+      <div class="grid" style="margin-top:12px">
+        <div class="item-card">
+          <b>🎥 Subir Video YouTube</b><br><br>
+          <input type="text" id="nomVid" class="inp" placeholder="👤 Tu Nombre y Área">
+          <input type="text" id="urlVid" class="inp" placeholder="🔗 Enlace YouTube">
+          <button onclick="subirVidAlu()" class="btn b-rojo">➕ PUBLICAR VIDEO</button>
+        </div>
+        <div class="item-card">
+          <b>🖼️ Subir Imagen</b><br><br>
+          <input type="text" id="nomImg" class="inp" placeholder="👤 Tu Nombre y Área">
+          <input type="file" id="filImg" accept="image/*" class="inp">
+          <button onclick="subirImgAlu()" class="btn b-verde">➕ PUBLICAR IMAGEN</button>
+        </div>
+      </div>
+      <div id="muroAlu" class="grid"></div>
+    </div>
+
+    <div class="card" style="background:#0b4f6c;color:#fff">
+      <h2>🤟📲 CONSULTAS E INSCRIPCIÓN</h2>
+      <a href="https://wa.me" target="_blank" class="btn-wa">💬 MENSAJE WHATSAPP</a>
+      <p style="font-size:14px">📵 SOLO MENSAJES ESCRITOS • NO LLAMADAS</p>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-<!-- PANTALLA 2: ELECCIÓN DE LAS 4 MATERIAS / CONTENIDOS -->
-<div id="pantalla-menu">
-<header>
-<div class="logo"><span>LSA</span>Curso de Lengua de Señas</div>
-<button class="btn-top" onclick="cerrarSesion()">🔒 Salir</button>
-</header>
-<div class="contenedor-menu">
-<h2>¡Bienvenidos! Elige un contenido para comenzar</h2>
-<p>Selecciona uno de los cuatro módulos del programa de enseñanza:</p>
-<div class="grilla-materias">
-<button class="card-materia" onclick="abrirMateria('com')">
-<span class="num-materia">Módulo 1</span>
-<h3>🗣️ Contenido Comunicativo</h3>
-<span>Saludos, presentación personal, datos, cortesía y preguntas básicas.</span>
-<div class="btn-ir">Entrar a la materia ➡️</div>
-</button>
-<button class="card-materia" onclick="abrirMateria('gram')">
-<span class="num-materia">Módulo 2</span>
-<h3>📐 Contenido Gramatical</h3>
-<span>Rasgos no manuales, uso del espacio señante, orden y verbos.</span>
-<div class="btn-ir">Entrar a la materia ➡️</div>
-</button>
-<button class="card-materia" onclick="abrirMateria('lex')">
-<span class="num-materia">Módulo 3</span>
-<h3>🤟 Contenido Léxico</h3>
-<span>Alfabeto dactilológico, números, familia, lugares y salud.</span>
-<div class="btn-ir">Entrar a la materia ➡️</div>
-</button>
-<button class="card-materia" onclick="abrirMateria('cult')">
-<span class="num-materia">Módulo 4</span>
-<h3>🏛️ Contenido Cultural</h3>
-<span>Identidad, historia de la comunidad sorda, CAS, normas y leyes.</span>
-<div class="btn-ir">Entrar a la materia ➡️</div>
-</button>
-</div>
-</div>
-</div>
-<!-- PANTALLA 3: DENTRO DE LA MATERIA -->
-<div id="aula-contenido">
-<header>
-<div class="logo"><span>LSA</span>Aula Práctica</div>
-<div style="display:flex;gap:8px">
-<button class="btn-top" onclick="volverMenu()">🏠 Menú Principal</button>
-<button class="btn-top" onclick="cerrarSesion()">🔒 Salir</button>
-</div>
-</header>
-<main>
-<section class="caja">
-<div class="cabecera-sena">
-<h2 id="tit"></h2>
-<button class="btn-ojo" onclick="toggleTexto()">👁️ Practicar sin texto</button>
-</div>
-<p class="desc" id="des"></p>
-<div class="marco">
-<div class="aviso-video" id="aviso"></div>
-<video id="vid" controls loop autoplay muted playsinline></video>
-</div>
-<div class="controles">
-<div class="grupo-btn">
-<button class="btn-c b-nav" onclick="mover(-1)">⬅️ Anterior</button>
-<button class="btn-c b-rep" onclick="rep()">🔄 Repetir</button>
-```html
+
 <script>
-// LISTA DE ALUMNOS: "DNI": "CONTRASEÑA_QUE_TU_ELIJAS"
-// Agrega aquí a cada inscripto nuevo:
-const ALUMNOS_AUTORIZADOS = {
-  "35123456": "lsa2026",
-  "40987654": "alumno2"
-};
+const DNI_PROFE = "12345678";
+let soyProfe = false;
 
-function verificarAcceso(){
-const usuario = document.getElementById('campo-usuario').value.trim().replace(/\./g,'');
-const clave = document.getElementById('campo-clave').value.trim();
-
-if(ALUMNOS_AUTORIZADOS[usuario] && ALUMNOS_AUTORIZADOS[usuario] === clave){
-sessionStorage.setItem('accesoLSA','ok');
-irAlMenu();
-}else{
-document.getElementById('msg-error').style.display='block';
+function entrar(){
+  const u = document.getElementById("uDni").value.trim();
+  const p = document.getElementById("pDni").value.trim();
+  const clave = localStorage.getItem("clave_profe") || DNI_PROFE;
+  if(u === DNI_PROFE && p === clave){
+    soyProfe = true;
+    document.getElementById("loginScreen").style.display="none";
+    document.getElementById("mainApp").style.display="block";
+    document.getElementById("lblUser").innerText="🎓 Instructor CAS";
+    document.getElementById("btnConfigProfe").style.display="inline-block";
+    pintarTodo();
+  } else if(u === p && /^\d{7,8}$/.test(u) && u !== DNI_PROFE){
+    soyProfe = false;
+    document.getElementById("loginScreen").style.display="none";
+    document.getElementById("mainApp").style.display="block";
+    document.getElementById("lblUser").innerText="👤 Alumno: "+u;
+    document.getElementById("btnConfigProfe").style.display="none";
+    pintarTodo();
+  } else { alert("❌ DNI o clave incorrectos"); }
 }
+function salir(){ location.reload(); }
+function abrirCfg(){ document.getElementById("modalConfig").style.display="flex"; }
+function cerrarCfg(){ document.getElementById("modalConfig").style.display="none"; }
+function cambiarClave(){
+  const c = document.getElementById("nuevaClave").value.trim();
+  if(c.length<4) return alert("⚠️ Mínimo 4 caracteres");
+  localStorage.setItem("clave_profe",c); alert("✅ Clave guardada");
 }
-function irAlMenu(){
-document.getElementById('pantalla-login').style.display='none';
-document.getElementById('aula-contenido').style.display='none';
-document.getElementById('pantalla-menu').style.display='block';
+function ytId(url){
+  const m = url.match(/^.(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]).*/);
+  return (m && m[2].length===11) ? m[2] : null;
 }
-function abrirMateria(clave){
-document.getElementById('pantalla-menu').style.display='none';
-document.getElementById('aula-contenido').style.display='block';
-verCat(clave);
+function cambiarPortada(){
+  const id = ytId(document.getElementById("vidPortada").value.trim());
+  if(!id) return alert("⚠️ Link inválido");
+  localStorage.setItem("vid_portada",id);
+  document.getElementById("ifPortada").src="https://youtube.com"+id+"?rel=0";
+  alert("✅ Portada actualizada");
 }
-function volverMenu(){
-vid.pause();
-irAlMenu();
+function verTab(id,btn){
+  document.querySelectorAll(".mod").forEach(e=>e.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(e=>e.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  btn.classList.add("active");
 }
-function cerrarSesion(){
-sessionStorage.removeItem('accesoLSA');
-location.reload();
+function subirProfe(){
+  const m = document.getElementById("selMod").value;
+  const t = document.getElementById("titMat").value.trim();
+  const v = ytId(document.getElementById("vidMat").value.trim());
+  const f = document.getElementById("imgMat").files[0];
+  if(!t) return alert("⚠️ Escribe un título");
+  if(v){ guardar(m,{id:Date.now(),tipo:"v",t:t,d:v}); limpiar(); }
+  else if(f){
+    const r = new FileReader();
+    r.onload=e=>{ guardar(m,{id:Date.now(),tipo:"i",t:t,d:e.target.result}); limpiar(); };
+    r.readAsDataURL(f);
+  } else { alert("⚠️ Pega un video o elige una imagen"); }
 }
-if(sessionStorage.getItem('accesoLSA')==='ok'){
-window.onload = irAlMenu;
+function guardar(m,obj){
+  const arr = JSON.parse(localStorage.getItem("lsa_"+m)||"[]");
+  arr.unshift(obj); localStorage.setItem("lsa_"+m,JSON.stringify(arr));
 }
-
-const datos={
-com:{t:"1. Contenido Comunicativo",i:[
-{n:"Saludos y Despedidas",d:"Hola, buen día, buenas tardes, chau.",v:"videos/com_saludos.mp4"},
-{n:"Presentación Personal",d:"Nombre en dactilología y seña personal.",v:"videos/com_presentacion.mp4"},
-{n:"Datos Personales",d:"Edad, lugar de residencia y condición auditiva.",v:"videos/com_datos.mp4"},
-{n:"Cortesía y Regulación",d:"Gracias, por favor, no entiendo, repetir.",v:"videos/com_cortesia.mp4"},
-{n:"Preguntas Básicas",d:"¿Qué?, ¿Quién?, ¿Dónde?, ¿Cuándo?, ¿Por qué?",v:"videos/com_preguntas.mp4"}
-]},
-gram:{t:"2. Contenido Gramatical",i:[
-{n:"Rasgos No Manuales (RNM)",d:"Expresión facial, cejas y postura corporal.",v:"videos/gram_rnm.mp4"},
-{n:"Uso del Espacio Señante",d:"Ubicación de referentes en el espacio.",v:"videos/gram_espacio.mp4"},
-{n:"Orden de la Oración",d:"Tiempo + Lugar + Sujeto + Objeto + Verbo.",v:"videos/gram_orden.mp4"},
-{n:"Pronombres y Deixis",d:"Señalamiento a participantes presentes o ausentes.",v:"videos/gram_pronombres.mp4"},
-{n:"Verbos y Clasificadores",d:"Verbos direccionales y formas de objetos.",v:"videos/gram_verbos.mp4"}
-]},
-lex:{t:"3. Contenido Léxico",i:[
-{n:"Alfabeto Dactilológico",d:"Configuraciones manuales de la A a la Z.",v:"videos/lex_abecedario.mp4"},
-{n:"Números, Días y Tiempo",d:"Números, días de la semana y meses.",v:"videos/lex_tiempo.mp4"},
-{n:"Familia y Personas",d:"Mamá, papá, hermano, amigo, profesor.",v:"videos/lex_familia.mp4"},
-{n:"Lugares y Ciudad",d:"Casa, escuela, hospital, asociación, trabajo.",v:"videos/lex_lugares.mp4"},
-{n:"Salud y Estados",d:"Bienestar, dolor, ayuda y acciones diarias.",v:"videos/lex_salud.mp4"}
-]},
-cult:{t:"4. Contenido Cultural",i:[
-{n:"Identidad y Comunidad",d:"La persona sorda como sujeto cultural y lingüístico.",v:"videos/cult_identidad.mp4"},
-{n:"Historia Comunidad Sorda",d:"Congreso de Milán (1880) e institutos en Argentina.",v:"videos/cult_historia.mp4"},
-{n:"Asociaciones y CAS",d:"Rol histórico de las asociaciones y la CAS.",v:"videos/cult_cas.mp4"},
-{n:"Reglas y Seña Personal",d:"Contacto visual, atención y apodo personal.",v:"videos/cult_reglas.mp4"},
-{n:"Leyes y Derechos LSA",d:"Reconocimiento de la LSA y accesibilidad.",v:"videos/cult_leyes.mp4"}
-]}
-};
-let catActual='com',idxActual=0;
-const vid=document.getElementById('vid'),tit=document.getElementById('tit'),des=document.getElementById('des'),sub=document.getElementById('subtit'),btns=document.getElementById('btns'),aviso=document.getElementById('aviso');
-vid.onerror=()=>{vid.style.display='none';aviso.innerHTML='🎬 Video en preparación<br><small>Archivo esperado: <b>'+datos[catActual].i[idxActual].v+'</b></small>';};
-vid.onloadeddata=()=>{vid.style.display='block';aviso.innerHTML='';};
-function verCat(c){
-catActual=c;
-document.getElementById('buscar').value='';
-document.querySelectorAll('.btn-cat').forEach(b=>b.classList.remove('activo'));
-sub.textContent=datos[c].t;
-dibujarBotones(datos[c].i);
-selSena(0);
+function borrar(m,id){
+  let arr = JSON.parse(localStorage.getItem("lsa_"+m)||"[]");
+  arr = arr.filter(x=>x.id!==id); localStorage.setItem("lsa_"+m,JSON.stringify(arr));
+  pintarTodo();
 }
-function dibujarBotones(lista){
-btns.innerHTML='';
-lista.forEach((it,idx)=>{
-const b=document.createElement('button');
-b.className='btn-s'+(idx===0?' sel':'');
-b.textContent='🤟 '+it.n;
-b.onclick=()=>selSena(datos[catActual].i.indexOf(it));
-btns.appendChild(b);
-});
+function limpiar(){
+  document.getElementById("titMat").value="";
+  document.getElementById("vidMat").value="";
+  document.getElementById("imgMat").value="";
+  pintarTodo(); alert("✅ Publicado");
 }
-function selSena(idx){
-idxActual=idx;
-const it=datos[catActual].i[idx];
-document.querySelectorAll('.btn-s').forEach((x)=>x.classList.toggle('sel',x.textContent.includes(it.n)));
-tit.textContent=it.n;
-des.textContent=it.d;
-des.classList.remove('oculta');
-vid.style.display='block';
-vid.src=it.v;
-vel(1);
+function pintarTodo(){
+  const vp = localStorage.getItem("vid_portada");
+  if(vp) document.getElementById("ifPortada").src="https://youtube.com"+vp+"?rel=0";
+  ["m1","m2","m3","m4"].forEach(m=>{
+    const box = document.getElementById("g"+m);
+    const arr = JSON.parse(localStorage.getItem("lsa_"+m)||"[]");
+    box.innerHTML = arr.length ? "" : "<p style='color:#666;grid-column:1/-1'>📂 Sin materiales aún</p>";
+    arr.forEach(x=>{
+      const med = x.tipo==="v" ? <div class="video-wrap"><iframe src="https://youtube.com${x.d}?rel=0" allowfullscreen></iframe></div> : <img src="${x.d}">;
+      const del = soyProfe ? <br><button onclick="borrar('${m}',${x.id})" style="background:#ef4444;color:#fff;border:none;padding:5px 10px;border-radius:6px;margin-top:6px;cursor:pointer">🗑️ Borrar</button> : "";
+      box.innerHTML += <div class="item-card">${med}<p style="font-weight:800;margin-top:6px">🤟 ${x.t}</p>${del}</div>;
+    });
+  });
 }
-function mover(dir){
-const total=datos[catActual].i.length;
-selSena((idxActual+dir+total)%total);
+function subirVidAlu(){
+  const n = document.getElementById("nomVid").value.trim();
+  const u = document.getElementById("urlVid").value.trim();
+  const id = ytId(u);
+  if(!n||!id) return alert("⚠️ Completa nombre y link válido");
+  document.getElementById("muroAlu").innerHTML = <div class="item-card"><div class="video-wrap"><iframe src="https://youtube.com${id}?rel=0" allowfullscreen></iframe></div><p style="font-weight:800;margin:6px 0">🎥 ${n}</p><a href="https://wa.me{encodeURIComponent(n)}%20${encodeURIComponent(u)}" target="_blank" style="background:#0b4f6c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:13px;display:inline-block">🤟 Avisar Instructor</a></div> + document.getElementById("muroAlu").innerHTML;
+  document.getElementById("nomVid").value=""; document.getElementById("urlVid").value="";
 }
-function filtrar(){
-const q=document.getElementById('buscar').value.toLowerCase();
-const filtrados=datos[catActual].i.filter(it=>it.n.toLowerCase().includes(q)||it.d.toLowerCase().includes(q));
-dibujarBotones(filtrados);
+function subirImgAlu(){
+  const n = document.getElementById("nomImg").value.trim();
+  const f = document.getElementById("filImg").files[0];
+  if(!n||!f) return alert("⚠️ Completa nombre y elige imagen");
+  const r = new FileReader();
+  r.onload=e=>{
+    document.getElementById("muroAlu").innerHTML = <div class="item-card"><img src="${e.target.result}"><p style="font-weight:800;margin:6px 0">🖼️ ${n}</p><a href="https://wa.me{encodeURIComponent(n)}" target="_blank" style="background:#0b4f6c;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:13px;display:inline-block">🤟 Avisar Instructor</a></div> + document.getElementById("muroAlu").innerHTML;
+    document.getElementById("nomImg").value=""; document.getElementById("filImg").value="";
+  };
+  r.readAsDataURL(f);
 }
-function toggleTexto(){des.classList.toggle('oculta');}
-function vel(v){
-vid.playbackRate=v;
-document.getElementById('v1').classList.toggle('activa',v===1);
-document.getElementById('v05').classList.toggle('activa',v===0.5);
-vid.play().catch(()=>{});
-}
-function rep(){vid.currentTime=0;vid.play().catch(()=>{});}
 </script>
 </body>
-</html
+</html>
