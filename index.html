@@ -3,61 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aula Práctica LSA</title>
+<title>Curso de Lengua de Señas Argentina (LSA)</title>
 <style>
-:root{--fondo:#F0F6FC;--tarjeta:#FFFFFF;--azul:#0284C7;--dorado:#F59E0B;--texto:#0F172A;--gris:#475569;--borde:#E2E8F0}
-*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+:root{--fondo:#F0F6FC;--tarjeta:#FFFFFF;--azul:#0284C7;--azul-osc:#0369A1;--dorado:#F59E0B;--texto:#0F172A;--gris:#475569;--borde:#E2E8F0}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
 body{background:var(--fondo);color:var(--texto);line-height:1.5}
+#pantalla-login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#E0F2FE 0%,#F0F6FC 100%)}
+.tarjeta-login{background:var(--tarjeta);max-width:440px;width:100%;padding:32px 26px;border-radius:20px;box-shadow:0 10px 25px rgba(2,132,199,0.12);text-align:center}
+.insignia-lsa{display:inline-block;background:var(--azul);color:#fff;font-weight:700;padding:6px 14px;border-radius:20px;font-size:.9rem;margin-bottom:14px}
+.tarjeta-login h1{font-size:1.6rem;margin-bottom:8px}
+.tarjeta-login p{color:var(--gris);font-size:.95rem;margin-bottom:20px}
+.grupo-campo{text-align:left;margin-bottom:14px}
+.grupo-campo label{display:block;font-size:.88rem;font-weight:700;color:var(--texto);margin-bottom:5px}
+.input-clave{width:100%;padding:12px 16px;border:2px solid var(--borde);border-radius:12px;font-size:1rem;letter-spacing:1px}
+.input-clave:focus{outline:none;border-color:var(--azul)}
+.btn-entrar{width:100%;padding:13px;background:var(--azul);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:6px}
+.btn-entrar:hover{background:var(--azul-osc)}
+.error-clave{color:#DC2626;font-size:.88rem;margin-top:12px;font-weight:600;display:none}
+.caja-inscripcion{margin-top:20px;padding-top:16px;border-top:1px solid var(--borde);font-size:.9rem;color:var(--gris)}
+.btn-wsp{display:inline-block;margin-top:8px;background:#16A34A;color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:700}
 header{background:var(--tarjeta);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--borde)}
-.logo{font-size:1.3rem;font-weight:700;color:var(--azul)}
+.logo{font-size:1.25rem;font-weight:700;color:var(--azul)}
 .logo span{background:var(--azul);color:#fff;padding:4px 10px;border-radius:8px;margin-right:8px}
-nav{background:var(--tarjeta);padding:12px 20px;display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--borde)}
+.btn-top{background:#F1F5F9;border:1px solid var(--borde);padding:7px 13px;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--gris)}
+#pantalla-menu{display:none}
+.contenedor-menu{max-width:960px;margin:36px auto;padding:0 20px;text-align:center}
+.contenedor-menu h2{font-size:1.6rem;margin-bottom:6px}
+.contenedor-menu p{color:var(--gris);margin-bottom:28px}
+.grilla-materias{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card-materia{background:var(--tarjeta);border:2px solid var(--borde);border-radius:18px;padding:28px 22px;text-align:left;cursor:pointer;transition:.2s;box-shadow:0 4px 12px rgba(2,132,199,0.06);display:flex;flex-direction:column;gap:8px}
+.card-materia:hover{border-color:var(--azul);transform:translateY(-3px);box-shadow:0 8px 20px rgba(2,132,199,0.14)}
+.num-materia{display:inline-block;background:#E0F2FE;color:var(--azul);font-weight:700;padding:4px 12px;border-radius:12px;font-size:.85rem;width:fit-content}
+.card-materia h3{font-size:1.25rem;color:var(--texto)}
+.card-materia span{color:var(--gris);font-size:.92rem}
+.btn-ir{margin-top:8px;color:var(--azul);font-weight:700;font-size:.92rem}
+#aula-contenido{display:none}
+nav{background:var(--tarjeta);padding:10px 20px;display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--borde)}
 .btn-cat{background:#F8FAFC;border:2px solid var(--borde);padding:8px 14px;font-weight:600;color:var(--gris);border-radius:20px;cursor:pointer}
 .btn-cat.activo{background:#E0F2FE;color:var(--azul);border-color:var(--azul)}
-main{max-width:1100px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
+main{max-width:1120px;margin:20px auto;padding:0 16px;display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
 .caja{background:var(--tarjeta);border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(2,132,199,0.08)}
-h1{font-size:1.4rem;margin-bottom:10px}
-.desc{background:#F8FAFC;border-left:4px solid var(--azul);padding:10px 14px;margin-bottom:16px;font-size:.95rem}
-.marco{width:100%;aspect-ratio:16/9;background:#0F172A;border-radius:12px;overflow:hidden}
-video{width:100%;height:100%;object-fit:contain}
+.cabecera-sena{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.cabecera-sena h2{font-size:1.4rem}
+.btn-ojo{background:#F1F5F9;border:1px solid var(--borde);padding:6px 12px;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--gris)}
+.desc{background:#F8FAFC;border-left:4px solid var(--azul);padding:10px 14px;margin-bottom:16px;font-size:.95rem;border-radius:0 8px 8px 0}
+.oculta{filter:blur(6px);user-select:none}
+.marco{width:100%;aspect-ratio:16/9;background:#0F172A;border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+video{width:100%;height:100%;object-fit:contain;z-index:2}
+.aviso-video{position:absolute;color:#E0F2FE;text-align:center;padding:20px;z-index:1;font-size:.95rem}
 .controles{margin-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.btn-c{padding:10px 14px;border:none;border-radius:10px;font-weight:600;cursor:pointer}
-.b-norm{background:var(--azul);color:#fff}
-.b-lent{background:var(--dorado);color:#fff}
-.b-rep{background:var(--fondo);color:var(--azul);border:1px solid var(--azul)}
-.lista{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-.btn-s{width:100%;text-align:left;padding:12px;background:#fff;border:2px solid var(--borde);border-radius:12px;font-weight:600;cursor:pointer}
+.grupo-btn{display:flex;gap:8px;flex-wrap:wrap}
+.btn-c{padding:9px 13px;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:.9rem}
+.b-norm{background:#E0F2FE;color:var(--azul)}
+.b-norm.activa{background:var(--azul);color:#fff}
+.b-lent{background:#FEF3C7;color:#B45309}
+.b-lent.activa{background:var(--dorado);color:#fff}
+.b-rep,.b-nav{background:var(--fondo);color:var(--azul);border:1px solid var(--azul)}
+.buscador{width:100%;padding:10px 12px;border:2px solid var(--borde);border-radius:10px;margin:10px 0;font-size:.95rem}
+.lista{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow-y:auto}
+.btn-s{width:100%;text-align:left;padding:11px 12px;background:#fff;border:2px solid var(--borde);border-radius:12px;font-weight:600;cursor:pointer;font-size:.92rem}
 .btn-s.sel{border-color:var(--dorado);background:#FFFBEB;color:#B45309}
-@media(max-width:800px){main{grid-template-columns:1fr}nav{display:grid;grid-template-columns:1fr 1fr}}
+@media(max-width:800px){main,.grilla-materias{grid-template-columns:1fr}nav{display:grid;grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-<header><div class="logo"><span>LSA</span>Aula Práctica</div></header>
+<!-- PANTALLA 1: ACCESO PERSONALIZADO POR ALUMNO -->
+<div id="pantalla-login">
+<div class="tarjeta-login">
+<div class="insignia-lsa">🤟 Lengua de Señas Argentina</div>
+<h1>¡Bienvenidos al Curso de LSA!</h1>
+<p>Ingresa tu número de <b>DNI</b> como usuario y la <b>contraseña asignada</b> por el docente.</p>
+<div class="grupo-campo">
+<label for="campo-usuario">👤 Usuario (DNI sin puntos)</label>
+<input type="text" inputmode="numeric" id="campo-usuario" class="input-clave" placeholder="Ej: 35123456">
+</div>
+<div class="grupo-campo">
+<label for="campo-clave">🔑 Contraseña personal</label>
+<input type="password" id="campo-clave" class="input-clave" placeholder="Escribe tu contraseña" onkeyup="if(event.key==='Enter')verificarAcceso()">
+</div>
+<button class="btn-entrar" onclick="verificarAcceso()">Ingresar al Curso</button>
+<div id="msg-error" class="error-clave">❌ Usuario o contraseña incorrectos. Verifica tus datos con el docente.</div>
+<div class="caja-inscripcion">
+¿Aún no estás inscripto?<br>
+<a href="https://wa.me" target="_blank" class="btn-wsp">💬 Inscribirme por WhatsApp (Solo texto)</a>
+</div>
+</div>
+</div>
+<!-- PANTALLA 2: ELECCIÓN DE LAS 4 MATERIAS / CONTENIDOS -->
+<div id="pantalla-menu">
+<header>
+<div class="logo"><span>LSA</span>Curso de Lengua de Señas</div>
+<button class="btn-top" onclick="cerrarSesion()">🔒 Salir</button>
+</header>
+<div class="contenedor-menu">
+<h2>¡Bienvenidos! Elige un contenido para comenzar</h2>
+<p>Selecciona uno de los cuatro módulos del programa de enseñanza:</p>
+<div class="grilla-materias">
+<button class="card-materia" onclick="abrirMateria('com')">
+<span class="num-materia">Módulo 1</span>
+<h3>🗣️ Contenido Comunicativo</h3>
+<span>Saludos, presentación personal, datos, cortesía y preguntas básicas.</span>
+<div class="btn-ir">Entrar a la materia ➡️</div>
+</button>
+<button class="card-materia" onclick="abrirMateria('gram')">
+<span class="num-materia">Módulo 2</span>
+<h3>📐 Contenido Gramatical</h3>
+<span>Rasgos no manuales, uso del espacio señante, orden y verbos.</span>
+<div class="btn-ir">Entrar a la materia ➡️</div>
+</button>
+<button class="card-materia" onclick="abrirMateria('lex')">
+<span class="num-materia">Módulo 3</span>
+<h3>🤟 Contenido Léxico</h3>
+<span>Alfabeto dactilológico, números, familia, lugares y salud.</span>
+<div class="btn-ir">Entrar a la materia ➡️</div>
+</button>
+<button class="card-materia" onclick="abrirMateria('cult')">
+<span class="num-materia">Módulo 4</span>
+<h3>🏛️ Contenido Cultural</h3>
+<span>Identidad, historia de la comunidad sorda, CAS, normas y leyes.</span>
+<div class="btn-ir">Entrar a la materia ➡️</div>
+</button>
+</div>
+</div>
+</div>
+<!-- PANTALLA 3: DENTRO DE LA MATERIA -->
+<div id="aula-contenido">
+<header>
+<div class="logo"><span>LSA</span>Aula Práctica</div>
+<div style="display:flex;gap:8px">
+<button class="btn-top" onclick="volverMenu()">🏠 Menú Principal</button>
+<button class="btn-top" onclick="cerrarSesion()">🔒 Salir</button>
+</div>
+</header>
 <nav>
-<button class="btn-cat activo" onclick="verCat('com',this)">1. Comunicativo</button>
-<button class="btn-cat" onclick="verCat('gram',this)">2. Gramatical</button>
-<button class="btn-cat" onclick="verCat('lex',this)">3. Léxico</button>
-<button class="btn-cat" onclick="verCat('cult',this)">4. Cultural</button>
+<button class="btn-cat" id="tab-com" onclick="verCat('com')">1. Comunicativo</button>
+<button class="btn-cat" id="tab-gram" onclick="verCat('gram')">2. Gramatical</button>
+<button class="btn-cat" id="tab-lex" onclick="verCat('lex')">3. Léxico</button>
+<button class="btn-cat" id="tab-cult" onclick="verCat('cult')">4. Cultural</button>
 </nav>
 <main>
 <section class="caja">
-<h1 id="tit"></h1>
+<div class="cabecera-sena">
+<h2 id="tit"></h2>
+<button class="btn-ojo" onclick="toggleTexto()">👁️ Practicar sin texto</button>
+</div>
 <p class="desc" id="des"></p>
-<div class="marco"><video id="vid" controls loop autoplay muted playsinline></video></div>
+<div class="marco">
+<div class="aviso-video" id="aviso"></div>
+<video id="vid" controls loop autoplay muted playsinline></video>
+</div>
 <div class="controles">
+<div class="grupo-btn">
+<button class="btn-c b-nav" onclick="mover(-1)">⬅️ Anterior</button>
 <button class="btn-c b-rep" onclick="rep()">🔄 Repetir</button>
-<div>
-<button class="btn-c b-norm" onclick="vel(1)">1x Normal</button>
-<button class="btn-c b-lent" onclick="vel(0.5)">0.5x Lento</button>
-</div>
-</div>
-</section>
-<aside class="caja">
-<h2 id="subtit" style="font-size:1.1rem"></h2>
-<div class="lista" id="btns"></div>
-</aside>
-</main>
+```html
 <script>
+// LISTA DE ALUMNOS: "DNI": "CONTRASEÑA_QUE_TU_ELIJAS"
+// Agrega aquí a cada inscripto nuevo:
+const ALUMNOS_AUTORIZADOS = {
+  "35123456": "lsa2026",
+  "40987654": "alumno2"
+};
+
+function verificarAcceso(){
+const usuario = document.getElementById('campo-usuario').value.trim().replace(/\./g,'');
+const clave = document.getElementById('campo-clave').value.trim();
+
+if(ALUMNOS_AUTORIZADOS[usuario] && ALUMNOS_AUTORIZADOS[usuario] === clave){
+sessionStorage.setItem('accesoLSA','ok');
+irAlMenu();
+}else{
+document.getElementById('msg-error').style.display='block';
+}
+}
+function irAlMenu(){
+document.getElementById('pantalla-login').style.display='none';
+document.getElementById('aula-contenido').style.display='none';
+document.getElementById('pantalla-menu').style.display='block';
+}
+function abrirMateria(clave){
+document.getElementById('pantalla-menu').style.display='none';
+document.getElementById('aula-contenido').style.display='block';
+verCat(clave);
+}
+function volverMenu(){
+vid.pause();
+irAlMenu();
+}
+function cerrarSesion(){
+sessionStorage.removeItem('accesoLSA');
+location.reload();
+}
+if(sessionStorage.getItem('accesoLSA')==='ok'){
+window.onload = irAlMenu;
+}
+
 const datos={
 com:{t:"1. Contenido Comunicativo",i:[
 {n:"Saludos y Despedidas",d:"Hola, buen día, buenas tardes, chau.",v:"videos/com_saludos.mp4"},
@@ -88,33 +228,57 @@ cult:{t:"4. Contenido Cultural",i:[
 {n:"Leyes y Derechos LSA",d:"Reconocimiento de la LSA y accesibilidad.",v:"videos/cult_leyes.mp4"}
 ]}
 };
-const vid=document.getElementById('vid'),tit=document.getElementById('tit'),des=document.getElementById('des'),sub=document.getElementById('subtit'),btns=document.getElementById('btns');
-function verCat(c,el){
+let catActual='com',idxActual=0;
+const vid=document.getElementById('vid'),tit=document.getElementById('tit'),des=document.getElementById('des'),sub=document.getElementById('subtit'),btns=document.getElementById('btns'),aviso=document.getElementById('aviso');
+vid.onerror=()=>{vid.style.display='none';aviso.innerHTML='🎬 Video en preparación<br><small>Archivo esperado: <b>'+datos[catActual].i[idxActual].v+'</b></small>';};
+vid.onloadeddata=()=>{vid.style.display='block';aviso.innerHTML='';};
+function verCat(c){
+catActual=c;
+document.getElementById('buscar').value='';
 document.querySelectorAll('.btn-cat').forEach(b=>b.classList.remove('activo'));
-el.classList.add('activo');
+document.getElementById('tab-'+c).classList.add('activo');
 sub.textContent=datos[c].t;
+dibujarBotones(datos[c].i);
+selSena(0);
+}
+function dibujarBotones(lista){
 btns.innerHTML='';
-datos[c].i.forEach((it,idx)=>{
+lista.forEach((it,idx)=>{
 const b=document.createElement('button');
 b.className='btn-s'+(idx===0?' sel':'');
 b.textContent='🤟 '+it.n;
-b.onclick=()=>selSena(it,b);
+b.onclick=()=>selSena(datos[catActual].i.indexOf(it));
 btns.appendChild(b);
 });
-selSena(datos[c].i[0],btns.firstChild);
 }
-function selSena(it,b){
-document.querySelectorAll('.btn-s').forEach(x=>x.classList.remove('sel'));
-if(b)b.classList.add('sel');
+function selSena(idx){
+idxActual=idx;
+const it=datos[catActual].i[idx];
+document.querySelectorAll('.btn-s').forEach((x)=>x.classList.toggle('sel',x.textContent.includes(it.n)));
 tit.textContent=it.n;
 des.textContent=it.d;
+des.classList.remove('oculta');
+vid.style.display='block';
 vid.src=it.v;
-vid.playbackRate=1;
+vel(1);
+}
+function mover(dir){
+const total=datos[catActual].i.length;
+selSena((idxActual+dir+total)%total);
+}
+function filtrar(){
+const q=document.getElementById('buscar').value.toLowerCase();
+const filtrados=datos[catActual].i.filter(it=>it.n.toLowerCase().includes(q)||it.d.toLowerCase().includes(q));
+dibujarBotones(filtrados);
+}
+function toggleTexto(){des.classList.toggle('oculta');}
+function vel(v){
+vid.playbackRate=v;
+document.getElementById('v1').classList.toggle('activa',v===1);
+document.getElementById('v05').classList.toggle('activa',v===0.5);
 vid.play().catch(()=>{});
 }
-function vel(v){vid.playbackRate=v;vid.play().catch(()=>{});}
 function rep(){vid.currentTime=0;vid.play().catch(()=>{});}
-verCat('com',document.querySelector('.btn-cat'));
 </script>
 </body>
-</html>
+</html
